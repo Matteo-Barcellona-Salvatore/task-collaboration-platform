@@ -1,0 +1,132 @@
+<div class="dashboard-wrapper">
+  <nav class="dashboard-navbar">
+    <div class="navbar-container">
+      <div class="brand-section">
+        <h1 class="brand-title">Task<span class="highlight">Collab</span></h1>
+      </div>
+      <div class="user-section">
+        <div class="user-info">
+          <span class="welcome-text">Welcome,</span>
+          <span class="user-name">{{ currentUser?.fullName || 'User' }}</span>
+        </div>
+        <button (click)="logout()" class="logout-button">
+          <span class="logout-icon"></span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-content">
+    <div class="content-container">
+      <div class="dashboard-header">
+        <div class="header-text">
+          <h2 class="page-title">Task Board</h2>
+          <p class="page-subtitle">Manage your tasks efficiently</p>
+        </div>
+        <button (click)="openTaskForm()" class="new-task-button">
+          <span class="button-icon">➕</span>
+          <span class="button-text">New Task</span>
+        </button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card todo-stat">
+          <div class="stat-icon">📋</div>
+          <div class="stat-content">
+            <h3 class="stat-label">To Do</h3>
+            <p class="stat-number">{{ todoTasks.length }}</p>
+          </div>
+          <div class="stat-badge">Tasks</div>
+        </div>
+
+        <div class="stat-card progress-stat">
+          <div class="stat-icon">🔄</div>
+          <div class="stat-content">
+            <h3 class="stat-label">In Progress</h3>
+            <p class="stat-number">{{ inProgressTasks.length }}</p>
+          </div>
+          <div class="stat-badge">Active</div>
+        </div>
+
+        <div class="stat-card done-stat">
+          <div class="stat-icon">✅</div>
+          <div class="stat-content">
+            <h3 class="stat-label">Completed</h3>
+            <p class="stat-number">{{ doneTasks.length }}</p>
+          </div>
+          <div class="stat-badge">Done</div>
+        </div>
+      </div>
+
+      <div class="kanban-board">
+        <div class="kanban-column todo-column">
+          <div class="column-header">
+            <div class="header-content">
+              <span class="column-icon">📋</span>
+              <h3 class="column-title">To Do</h3>
+            </div>
+            <span class="task-count">{{ todoTasks.length }}</span>
+          </div>
+          <div class="column-body">
+            <app-task-list
+              [tasks]="todoTasks"
+              (taskEdit)="openTaskForm($event)"
+              (taskDelete)="onTaskDeleted()"
+            ></app-task-list>
+          </div>
+        </div>
+
+        <div class="kanban-column progress-column">
+          <div class="column-header">
+            <div class="header-content">
+              <span class="column-icon">🔄</span>
+              <h3 class="column-title">In Progress</h3>
+            </div>
+            <span class="task-count">{{ inProgressTasks.length }}</span>
+          </div>
+          <div class="column-body">
+            <app-task-list
+              [tasks]="inProgressTasks"
+              (taskEdit)="openTaskForm($event)"
+              (taskDelete)="onTaskDeleted()"
+            ></app-task-list>
+          </div>
+        </div>
+
+        <div class="kanban-column done-column">
+          <div class="column-header">
+            <div class="header-content">
+              <span class="column-icon">✅</span>
+              <h3 class="column-title">Completed</h3>
+            </div>
+            <span class="task-count">{{ doneTasks.length }}</span>
+          </div>
+          <div class="column-body">
+            <app-task-list
+              [tasks]="doneTasks"
+              (taskEdit)="openTaskForm($event)"
+              (taskDelete)="onTaskDeleted()"
+            ></app-task-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showTaskForm" class="modal-overlay" (click)="closeTaskForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ editingTask ? '✏️ Edit Task' : '➕ Create New Task' }}</h3>
+        <button (click)="closeTaskForm()" class="close-button">✕</button>
+      </div>
+      <div class="modal-body">
+        <app-task-form
+          [task]="editingTask"
+          (taskSaved)="onTaskSaved()"
+          (cancelled)="closeTaskForm()"
+        ></app-task-form>
+      </div>
+    </div>
+  </div>
+</div>

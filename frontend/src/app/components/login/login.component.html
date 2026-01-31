@@ -1,0 +1,80 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="logo-section">
+        <h1 class="app-title">Task Collaboration</h1>
+        <p class="app-subtitle">Enterprise Project Management</p>
+      </div>
+
+      <div class="login-form-section">
+        <h2 class="form-title">Welcome Back</h2>
+        <p class="form-subtitle">Sign in to continue to your workspace</p>
+
+        <form (ngSubmit)="onSubmit()" class="login-form">
+          <div *ngIf="error" class="error-alert">
+            <span class="error-icon">⚠️</span>
+            <span>{{ error }}</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input
+                type="text"
+                [(ngModel)]="loginData.username"
+                name="username"
+                required
+                class="form-input"
+                placeholder="Enter your username"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input
+                type="password"
+                [(ngModel)]="loginData.password"
+                name="password"
+                required
+                class="form-input"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="loading"
+            class="submit-button"
+            [class.loading]="loading"
+          >
+            <span *ngIf="!loading">Sign In</span>
+            <span *ngIf="loading" class="loading-spinner">
+              <span class="spinner"></span>
+              Signing in...
+            </span>
+          </button>
+        </form>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <p class="register-link">
+          Don't have an account?
+          <a routerLink="/register" class="link-primary">Create Account →</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="background-decoration">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+    </div>
+  </div>
+</div>

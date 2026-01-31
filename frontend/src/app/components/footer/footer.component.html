@@ -1,0 +1,72 @@
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Top Section -->
+    <div class="footer-top">
+      <!-- Brand Section -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-text">Task<span class="logo-highlight">Collab</span></span>
+        </div>
+        <p class="footer-description">
+          The modern task management platform built for productive teams. 
+          Collaborate seamlessly and achieve more together.
+        </p>
+        <div class="social-links">
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div *ngFor="let section of footerLinks" class="footer-section">
+          <h3 class="section-title">{{ section.title }}</h3>
+          <ul class="links-list">
+            <li *ngFor="let link of section.links">
+              <a [href]="link.url" class="footer-link">{{ link.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-newsletter">
+      <div class="newsletter-content">
+        <div class="newsletter-info">
+          <h3 class="newsletter-title">Stay Updated</h3>
+          <p class="newsletter-description">
+            Get the latest updates, tips, and exclusive features delivered to your inbox.
+          </p>
+        </div>
+        <div class="newsletter-form">
+          <div class="input-group">
+            <span class="input-icon"></span>
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="newsletter-input"
+            />
+            <button class="subscribe-btn">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="copyright">
+           {{ currentYear }} <strong>TaskCollab</strong>
+        </p>
+        <div class="footer-meta">
+          <span class="meta-item">Global</span>
+          <span class="meta-item">Secure</span>
+          <span class="meta-item">Fast</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="footer-decoration">
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-wave"></div>
+  </div>
+</footer>

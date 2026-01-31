@@ -1,0 +1,138 @@
+<div class="register-wrapper">
+  <!-- Background Decoration -->
+  <div class="background-decoration">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+  </div>
+
+  <div class="register-container">
+    <div class="register-card">
+      <!-- Logo Section -->
+      <div class="logo-section">
+        <h1 class="app-title">Task Collaboration</h1>
+        <p class="app-subtitle">Join thousands of productive teams</p>
+      </div>
+
+      <!-- Register Form Section -->
+      <div class="register-form-section">
+        <h2 class="form-title">Create Account</h2>
+        <p class="form-subtitle">Start managing your tasks efficiently</p>
+
+        <form (ngSubmit)="onSubmit()" class="register-form">
+          <!-- Error Alert -->
+          <div *ngIf="error" class="error-alert">
+            <span class="error-icon">⚠️</span>
+            <span>{{ error }}</span>
+          </div>
+
+          <!-- Full Name Input -->
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input
+                type="text"
+                class="form-input"
+                [(ngModel)]="registerData.fullName"
+                name="fullName"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Username Input -->
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <div class="input-wrapper">
+              <span class="input-icon">@</span>
+              <input
+                type="text"
+                class="form-input"
+                [(ngModel)]="registerData.username"
+                name="username"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📧</span>
+              <input
+                type="email"
+                class="form-input"
+                [(ngModel)]="registerData.email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input
+                type="password"
+                class="form-input"
+                [(ngModel)]="registerData.password"
+                name="password"
+                placeholder="Create a strong password"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Confirm Password Input -->
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔑</span>
+              <input
+                type="password"
+                class="form-input"
+                [(ngModel)]="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            class="submit-button" 
+            [disabled]="loading"
+            [class.loading]="loading"
+          >
+            <span *ngIf="!loading">Create Account</span>
+            <div *ngIf="loading" class="loading-spinner">
+              <div class="spinner"></div>
+              <span>Creating Account...</span>
+            </div>
+          </button>
+
+          <!-- Divider -->
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <!-- Login Link -->
+          <div class="login-link">
+            Already have an account?
+            <a routerLink="/login" class="link-primary">Sign In →</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

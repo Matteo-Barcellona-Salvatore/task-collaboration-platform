@@ -1,0 +1,66 @@
+<div class="task-list-container">
+  <!-- Empty State -->
+  <div *ngIf="tasks.length === 0" class="empty-state">
+    <div class="empty-icon">📋</div>
+    <p class="empty-text">No tasks yet</p>
+    <p class="empty-subtext">Create a new task to get started</p>
+  </div>
+
+  <!-- Task Cards -->
+  <div class="tasks-grid">
+    <div
+      *ngFor="let task of tasks"
+      class="task-card"
+      [class.priority-high]="task.priority === 'HIGH'"
+      [class.priority-medium]="task.priority === 'MEDIUM'"
+      [class.priority-low]="task.priority === 'LOW'"
+    >
+      <!-- Priority Indicator -->
+      <div class="priority-indicator"></div>
+
+      <!-- Card Header -->
+      <div class="card-header">
+        <h4 class="task-title">{{ task.title }}</h4>
+        <span [class]="'priority-badge ' + task.priority.toLowerCase()">
+          <span class="badge-dot"></span>
+          <span class="badge-text">{{ task.priority }}</span>
+        </span>
+      </div>
+
+      <!-- Task Description -->
+      <p class="task-description" *ngIf="task.description">
+        {{ task.description }}
+      </p>
+
+      <!-- Task Meta Info -->
+      <div class="task-meta">
+        <div class="meta-item" *ngIf="task.assignedToName">
+          <span class="meta-icon">👤</span>
+          <span class="meta-text">{{ task.assignedToName }}</span>
+        </div>
+        <div class="meta-item" *ngIf="task.dueDate">
+          <span class="meta-icon">📅</span>
+          <span class="meta-text">{{ formatDate(task.dueDate) }}</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="card-actions">
+        <button
+          (click)="editTask(task)"
+          class="action-button edit-button"
+        >
+          <span class="button-icon">✏️</span>
+          <span class="button-text">Edit</span>
+        </button>
+        <button
+          (click)="deleteTask(task)"
+          class="action-button delete-button"
+        >
+          <span class="button-icon">🗑️</span>
+          <span class="button-text">Delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

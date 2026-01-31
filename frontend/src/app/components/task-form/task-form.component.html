@@ -1,0 +1,135 @@
+<div class="task-form-wrapper">
+  <form (ngSubmit)="onSubmit()" class="task-form">
+    <!-- Error Alert -->
+    <div *ngIf="error" class="error-alert">
+      <span class="error-icon">⚠️</span>
+      <span class="error-message">{{ error }}</span>
+    </div>
+
+    <!-- Title Input -->
+    <div class="form-group">
+      <label class="form-label">
+        <span class="label-text">Task Title</span>
+        <span class="required-mark">*</span>
+      </label>
+      <div class="input-wrapper">
+        <span class="input-icon">📝</span>
+        <input
+          type="text"
+          [(ngModel)]="formData.title"
+          name="title"
+          required
+          class="form-input"
+          placeholder="Enter a descriptive task title"
+        />
+      </div>
+    </div>
+
+    <!-- Description Input -->
+    <div class="form-group">
+      <label class="form-label">
+        <span class="label-text">Description</span>
+      </label>
+      <div class="input-wrapper">
+        <span class="textarea-icon">📄</span>
+        <textarea
+          [(ngModel)]="formData.description"
+          name="description"
+          rows="4"
+          class="form-textarea"
+          placeholder="Add detailed description of the task..."
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Status and Priority Grid -->
+    <div class="form-row">
+      <!-- Status Select -->
+      <div class="form-group">
+        <label class="form-label">
+          <span class="label-text">Status</span>
+        </label>
+        <div class="select-wrapper">
+          <span class="select-icon">🔄</span>
+          <select
+            [(ngModel)]="formData.status"
+            name="status"
+            class="form-select"
+          >
+            <option value="TODO">📋 To Do</option>
+            <option value="IN_PROGRESS">🔄 In Progress</option>
+            <option value="DONE">✅ Done</option>
+          </select>
+          <span class="select-arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- Priority Select -->
+      <div class="form-group">
+        <label class="form-label">
+          <span class="label-text">Priority</span>
+        </label>
+        <div class="select-wrapper">
+          <span class="select-icon">🎯</span>
+          <select
+            [(ngModel)]="formData.priority"
+            name="priority"
+            class="form-select"
+            [class.priority-high]="formData.priority === 'HIGH'"
+            [class.priority-medium]="formData.priority === 'MEDIUM'"
+            [class.priority-low]="formData.priority === 'LOW'"
+          >
+            <option value="LOW">🟢 Low Priority</option>
+            <option value="MEDIUM">🟡 Medium Priority</option>
+            <option value="HIGH">🔴 High Priority</option>
+          </select>
+          <span class="select-arrow">▼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Due Date Input -->
+    <div class="form-group">
+      <label class="form-label">
+        <span class="label-text">Due Date</span>
+      </label>
+      <div class="input-wrapper">
+        <span class="input-icon">📅</span>
+        <input
+          type="date"
+          [(ngModel)]="formData.dueDate"
+          name="dueDate"
+          class="form-input date-input"
+        />
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="cancel-button"
+      >
+        <span class="button-icon">✕</span>
+        <span class="button-text">Cancel</span>
+      </button>
+      
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="submit-button"
+        [class.loading]="loading"
+      >
+        <span *ngIf="!loading" class="button-content">
+          <span class="button-icon">{{ task ? '💾' : '➕' }}</span>
+          <span class="button-text">{{ task ? 'Update Task' : 'Create Task' }}</span>
+        </span>
+        <span *ngIf="loading" class="loading-content">
+          <span class="spinner"></span>
+          <span class="button-text">{{ task ? 'Updating...' : 'Creating...' }}</span>
+        </span>
+      </button>
+    </div>
+  </form>
+</div>
