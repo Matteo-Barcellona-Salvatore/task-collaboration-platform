@@ -62,9 +62,3 @@
 - **GitHub Actions** - CI/CD (ready)
 - **Nginx** - Web Server (for production)
 
----
-
-##  Architecture
-
-### High-Level Architecture
-```
